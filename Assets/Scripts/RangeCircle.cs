@@ -73,6 +73,10 @@ public class RangeCircle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // 停止中ならスキップ
+        if (Parent.isStop)
+            return;
+
         // 攻撃処理
         if(frame % attackFrame == 0)
         {

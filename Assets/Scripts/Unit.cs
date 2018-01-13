@@ -17,6 +17,11 @@ public class Unit : MonoBehaviour {
     /// </summary>
     public int Money = 100;
 
+    /// <summary>
+    /// trueになると停止
+    /// </summary>
+    public bool isStop = false;
+
 	// Use this for initialization
 	void Start () {
 		

@@ -10,25 +10,28 @@ public class Slime : MonoBehaviour
 	/// </summary>
 	public bool isMine = true;
 
+    private int frame = 0;
+    private float range = 3.0f;
+    public float speed = 0.02f;
+
     // Use this for initialization
     void Start()
     {
         var circle = transform.GetComponentInChildren<RangeCircle>();
         string tag = isMine ? "enemy" : "mine";
         circle.Init(range, 10, tag);
-        
+
+        if (!isMine)
+            speed *= -1;
     }
 
-    private int frame = 0;
-    private float range = 3.0f;
 
     // Update is called once per frame
     void Update()
     {
+        if (transform.GetComponent<Unit>().isStop)
+            return;
         // Move
-        float speed = 0.01f;
-        if (!isMine)
-            speed *= -1;
         var pos = transform.position;
         pos.x += speed;
         transform.position = pos;
