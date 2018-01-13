@@ -16,8 +16,19 @@ RangeCircle.Update（攻撃） ← Unit.Damage（攻撃力）
 
 Slime.Update（移動）  
 
+# ゲームマネージャ
+クリアを管理  
+![](readme2.png)
+
+- 自拠点・敵拠点のUnitオブジェクト
+- プレイ時間
+
+を保持  
+どちらかの拠点が破壊されれば子に持っているUnitたちを停止させ（isStop = true)対応したCanvasを表示する
+
+
 # TODO
-- HP表示(option)
+- [x] HP表示
 - 拠点
 - ゲームクリア
 - ゲームオーバー

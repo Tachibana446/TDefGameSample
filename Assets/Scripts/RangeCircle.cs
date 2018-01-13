@@ -27,6 +27,10 @@ public class RangeCircle : MonoBehaviour {
     /// どのタグのユニットを攻撃するか
     /// </summary>
     private string targetTag;
+    /// <summary>
+    /// 攻撃モーション
+    /// </summary>
+    private SlashEffect attackEffect;
 
     /// <summary>
     /// 親＝ユニット
@@ -68,8 +72,8 @@ public class RangeCircle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        attackEffect = Parent.GetComponentInChildren<SlashEffect>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -80,11 +84,18 @@ public class RangeCircle : MonoBehaviour {
         // 攻撃処理
         if(frame % attackFrame == 0)
         {
+            // 攻撃モーション
+            if (enemies.Count == 0) {
+                //attackEffect.Stop();
+            }
+            else if(!attackEffect.isPlaying)
+            {
+                attackEffect.Play();
+            }
+
+
             foreach (var e in enemies)
             {
-                // DEBUG
-                Debug.Log("Attack!");
-
                 var unit = e.GetComponent<Unit>();
                 unit.Hp -= Parent.Damage;
                 if(unit.Hp <= 0)

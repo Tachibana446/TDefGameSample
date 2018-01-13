@@ -24,6 +24,13 @@ public class GameManager : MonoBehaviour
     private bool isClear = false;
 
     /// <summary>
+    /// ゲームオーバー時に表示するキャンバス
+    /// </summary>
+    public Canvas GameOverCanvas;
+    private bool isGameOver = false;
+
+
+    /// <summary>
     /// かかった時間
     /// </summary>
     public MyTime time = new MyTime();
@@ -50,11 +57,17 @@ public class GameManager : MonoBehaviour
             GameClearCanvas.gameObject.SetActive(true);
         }
         // 負け
-        else if (MyTower.Hp <= 0)
+        else if (MyTower.Hp <= 0 && !isGameOver && !isClear)
         {
-
+            isGameOver = true;
+            foreach (var unit in GetComponentsInChildren<Unit>())
+            {
+                unit.isStop = true;
+            }
+            // 
+            GameOverCanvas.gameObject.SetActive(true);
         }
-        if (!isClear)
+        if (!isClear && !isGameOver)
             time.Add(Time.deltaTime);
     }
 }
